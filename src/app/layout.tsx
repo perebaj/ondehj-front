@@ -12,7 +12,7 @@ export default function RootLayout({
       <head>
         <title>Onde Hoje? ¯\_(ツ)_/¯</title>
       </head>
-      <ClerkProvider afterSignInUrl="/events" afterSignUpUrl="/events">
+      <ClerkProvider>
         <body>{children}</body>
       </ClerkProvider>
     </html>

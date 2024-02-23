@@ -1,7 +1,7 @@
-'use client'
-import { useUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs'
 import { Check, PartyPopper } from 'lucide-react'
 
+// import? { redirect } from 'next/navigation'
 import {
   Accordion,
   AccordionContent,
@@ -20,13 +20,20 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 
 import Billing from '../components/billing'
 import { Button } from '../components/ui/button'
-export default function Home() {
-  const { isSignedIn } = useUser()
+
+export default async function Home() {
+  const user = await currentUser()
+  // const {  } = auth()
+  // const { userId } = auth()
+
+  // if (!userId) {
+  //   redirect('/')
+  // }
 
   // Redirect to eventsPage if user is signed in
-  const redirect = isSignedIn ? '/events' : '/sign-up'
+  const redirect = user ? '/events' : '/sign-up'
 
-  const payment = isSignedIn ? (
+  const payment = user ? (
     <Button variant={'outline'}>
       <Dialog>
         <DialogTrigger>Assine Agora</DialogTrigger>
@@ -63,7 +70,7 @@ export default function Home() {
             <a
               className="no-underline hover:underline"
               title="eventsPage"
-              href="/events"
+              href={redirect}
             >
               Eventos
             </a>
@@ -106,11 +113,11 @@ export default function Home() {
       <section id="pricing" className="bg-slate-100">
         <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className=" relative z-10 mx-auto flex max-w-5xl flex-col items-center justify-center gap-8  px-8 py-12 lg:gap-12 lg:py-32">
-            {/* <div className="absolute inset-0 flex rotate-12 transform items-center justify-center">
+            <div className="absolute inset-0 flex rotate-12 transform items-center justify-center">
               <span className="text-shadow border-text p-4 text-9xl font-bold text-red-600">
                 De graça até final de março
               </span>
-            </div> */}
+            </div>
             <h1 className="text-4xl">
               Preço{' '}
               <span className="font-black italic tracking-tight text-primary">
@@ -148,7 +155,12 @@ export default function Home() {
                     </li>
                   </ul>
                 </CardContent>
-                <CardFooter>{payment}</CardFooter>
+                <CardFooter>
+                  {payment}
+                  <p className="mb-2 mt-2 text-xs text-gray-500">
+                    * Pagamento único
+                  </p>
+                </CardFooter>
                 <p className="mb-2 mt-2 text-xs text-gray-500">
                   * Pagamento único
                 </p>

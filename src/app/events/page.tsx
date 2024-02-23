@@ -1,5 +1,5 @@
 'use client'
-import { SignedIn, useAuth, useUser } from '@clerk/nextjs'
+import { SignedIn, useUser } from '@clerk/nextjs'
 
 import Events from '@/components/events'
 import EventsHeader from '@/components/eventsHeader'

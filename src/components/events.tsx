@@ -1,3 +1,4 @@
+'use client'
 import Event from '@/components/event'
 import EventForms from '@/components/eventForms'
 import { Button } from '@/components/ui/button'

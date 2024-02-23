@@ -1,16 +1,15 @@
 import './globals.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
-// import { Backpack } from 'lucide-react'
 import type { Metadata } from 'next'
-import { Inter as FontSans } from 'next/font/google'
 
+// import { Inter } from 'next/font/google'
 import { cn } from '../lib/utils'
 
-export const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-})
+// const inter = Inter({
+//   subsets: ['latin'],
+//   variable: '--font-sans',
+// })
 
 export const metadata: Metadata = {
   title: 'Onde hoje?',

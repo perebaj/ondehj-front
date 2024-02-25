@@ -8,7 +8,7 @@ import { UserButton } from '@clerk/nextjs'
 export default function EventsHeader() {
   return (
     <header className="border-b bg-slate-50">
-      <div className="mx-auto flex items-center justify-center gap-4 py-3 max-lg:px-4 lg:max-w-7xl lg:justify-between">
+      <div className="mx-auto flex items-center justify-center gap-4 py-3 max-lg:px-4 lg:max-w-7xl lg:justify-center">
         <UserButton afterSignOutUrl="/" />
         <a
           href="/"

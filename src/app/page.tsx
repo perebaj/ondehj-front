@@ -85,7 +85,10 @@ export default function LandingPage() {
         <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className=" relative z-10 mx-auto flex max-w-5xl flex-col items-center justify-center gap-8  px-8 py-12 lg:gap-12 lg:py-32">
             <div className="absolute inset-0 flex rotate-12 transform items-center justify-center">
-              <span className="text-shadow border-text p-4 text-9xl font-bold text-red-600">
+              <span
+                className="text-shadow border-text  p-4 text-8xl font-bold
+               text-red-600"
+              >
                 De graça até o final de março
               </span>
             </div>

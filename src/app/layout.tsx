@@ -2,11 +2,11 @@ import './globals.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Fredoka } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
 
-const roboto = Roboto({
+const fredoka = Fredoka({
   weight: '400',
   subsets: ['latin'],
   style: 'normal',
@@ -27,7 +27,7 @@ export default function RootLayout({
         <body
           className={cn(
             'min-h-screen bg-background font-sans antialiased',
-            roboto.className,
+            fredoka.className,
           )}
         >
           {children}

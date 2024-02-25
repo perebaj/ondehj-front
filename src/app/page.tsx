@@ -62,7 +62,7 @@ export default function LandingPage() {
               </span>
               <span>da sua universidade, em um só lugar</span>
             </h1>
-            <p className="max-w-md text-center text-sm font-extrabold leading-relaxed text-slate-500 md:text-base">
+            <p className="max-w-md text-center text-xs font-extrabold leading-relaxed text-slate-400 md:text-sm">
               Confuso com quantidade de coisas para fazer na sua faculdade? Aqui
               você encontra todos os eventos esportivos, acadêmicos, culturais e
               festas em um só lugar.

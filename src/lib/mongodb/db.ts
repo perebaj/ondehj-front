@@ -8,8 +8,13 @@ if (!MONGODB_URL) {
 }
 
 const client = new MongoClient(MONGODB_URL, {
+  connectTimeoutMS: 1000,
+  waitQueueTimeoutMS: 1000,
+  serverSelectionTimeoutMS: 1000,
+  socketTimeoutMS: 1000,
   serverApi: {
     version: ServerApiVersion.v1,
+
     strict: true,
     deprecationErrors: true,
   },
@@ -42,6 +47,9 @@ export async function getEvents(): Promise<Event[]> {
     console.log(events)
 
     return events
+  } catch (error) {
+    console.error('Error getting events', error)
+    throw error
   } finally {
     await client.close()
   }
@@ -52,6 +60,9 @@ export async function saveEvent(event: Event): Promise<void> {
     await client.connect()
     await client.db('ondehoje').collection<Event>('events').insertOne(event)
     console.log('Event saved')
+  } catch (error) {
+    console.error('Error saving event', error)
+    throw error
   } finally {
     await client.close()
   }

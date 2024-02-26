@@ -1,9 +1,8 @@
-'use client'
 import { Toaster } from 'sonner'
 
 import Events from './events'
 import EventsHeader from './header'
-export default function EventsPage() {
+export default async function EventsPage() {
   return (
     <div>
       <Toaster richColors closeButton />

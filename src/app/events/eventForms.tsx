@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -41,7 +42,6 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Event, saveEvent } from '@/lib/mongodb/db'
 import { cn } from '@/lib/utils'
-
 const formSchema = z.object({
   name: z.string().min(1, 'Nome do evento é obrigatório'),
   description: z.string().min(1, 'Descrição do evento é obrigatória'),
@@ -61,6 +61,7 @@ export default function EventForms() {
     },
   })
   const [open, setOpen] = useState(false)
+  const router = useRouter()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -85,6 +86,7 @@ export default function EventForms() {
         { keepValues: false },
       )
       setOpen(false)
+      router.refresh()
     } catch (error) {
       toast.error('Erro ao criar evento')
     }

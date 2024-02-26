@@ -11,9 +11,10 @@ import moment from 'moment'
 type EventProps = {
   name: string
   description: string
-  date: number
+  date: Date
   instagramURL: string
   type: string
+  key: string
 }
 
 export default function Event(props: EventProps) {

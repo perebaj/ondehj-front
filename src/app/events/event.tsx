@@ -12,7 +12,7 @@ type EventProps = {
   name: string
   description: string
   date: Date
-  instagramURL: string
+  instagramURL?: string
   type: string
   key: string
 }
@@ -60,13 +60,15 @@ export default function Event(props: EventProps) {
       <time className="mt-auto self-start text-sm font-medium text-gray-500 dark:text-gray-400">
         {date}
       </time>
-      <a
-        className="inline-flex items-center no-underline hover:underline"
-        href={props.instagramURL}
-      >
-        Veja no Instagram
-        <ChevronRightIcon className="ml-1.5 inline-block h-4 w-4" />
-      </a>
+      {props.instagramURL && (
+        <a
+          className="inline-flex items-center no-underline hover:underline"
+          href={props.instagramURL}
+        >
+          Veja no Instagram
+          <ChevronRightIcon className="ml-1.5 inline-block h-4 w-4" />
+        </a>
+      )}
     </div>
   )
 }

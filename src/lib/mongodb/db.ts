@@ -26,7 +26,7 @@ export type Event = {
   createdAt: Date
   description: string
   name: string
-  instagramURL: string
+  instagramURL?: string
   type: string
 }
 

@@ -46,7 +46,14 @@ const formSchema = z.object({
   name: z.string().min(1, 'Nome do evento é obrigatório'),
   description: z.string().min(1, 'Descrição do evento é obrigatória'),
   date: z.date({ required_error: 'Data do evento é obrigatória' }),
-  instagramURL: z.string(),
+  instagramURL: z
+    .string()
+    .regex(
+      /^https:\/\/www\.instagram\.com\/.*\/$/,
+      'A url do instagram deve ser algo como https://www.instagram.com/usuario/',
+    )
+    .optional()
+    .or(z.string().length(0)),
   type: z.string(),
 })
 

@@ -96,6 +96,7 @@ export default function EventForms() {
       )
       setOpen(false)
       router.refresh()
+      setIsButtonLoading(false)
     } catch (error) {
       toast.error('Erro ao criar evento')
     }

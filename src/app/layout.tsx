@@ -5,7 +5,6 @@ import type { Metadata } from 'next'
 import { Fredoka } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
-
 const fredoka = Fredoka({
   weight: '400',
   subsets: ['latin'],
@@ -22,16 +21,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider afterSignInUrl="/events" afterSignUpUrl="/events">
+    <ClerkProvider>
       <html lang="en">
-        <body
-          className={cn(
-            'min-h-screen bg-background font-sans antialiased',
-            fredoka.className,
-          )}
-        >
-          {children}
-        </body>
+        <body className={cn(fredoka.className, 'antialiased')}>{children}</body>
       </html>
     </ClerkProvider>
   )

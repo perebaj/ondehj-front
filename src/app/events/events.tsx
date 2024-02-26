@@ -1,14 +1,4 @@
 'use client'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 
 import Event from './event'
 import EventForms from './eventForms'
@@ -66,26 +56,7 @@ export default function Events() {
           <p className="mx-auto max-w-[700px] py-4 text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Descubra e participe de eventos que acontecem no seu campus.
           </p>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button>Criar Novo Evento</Button>
-            </DialogTrigger>
-            <DialogContent
-              onInteractOutside={(e) => {
-                e.preventDefault()
-              }}
-              className="max-w-xs lg:max-w-2xl"
-            >
-              <DialogHeader>
-                <DialogTitle>Criar Novo Evento</DialogTitle>
-                <DialogDescription>
-                  Preencha e compartilhe um novo evento com o seu campus.
-                </DialogDescription>
-              </DialogHeader>
-              <EventForms />
-              <DialogClose asChild></DialogClose>
-            </DialogContent>
-          </Dialog>
+          <EventForms />
         </div>
       </div>
       <div className="container grid max-w-6xl justify-center gap-4 px-4 py-4 md:px-6 md:py-6">

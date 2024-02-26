@@ -63,27 +63,31 @@ export default function EventForms() {
   const [open, setOpen] = useState(false)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const event: Event = {
-      name: values.name,
-      description: values.description,
-      instagramURL: values.instagramURL,
-      type: values.type,
-      eventDate: values.date,
-      createdAt: new Date(),
-    }
-    await saveEvent(event)
+    try {
+      const event: Event = {
+        name: values.name,
+        description: values.description,
+        instagramURL: values.instagramURL,
+        type: values.type,
+        eventDate: values.date,
+        createdAt: new Date(),
+      }
+      await saveEvent(event)
 
-    toast.success('Evento criado com sucesso!')
-    form.reset(
-      {
-        name: '',
-        description: '',
-        instagramURL: '',
-        type: '',
-      },
-      { keepValues: false },
-    )
-    setOpen(false)
+      toast.success('Evento criado com sucesso!')
+      form.reset(
+        {
+          name: '',
+          description: '',
+          instagramURL: '',
+          type: '',
+        },
+        { keepValues: false },
+      )
+      setOpen(false)
+    } catch (error) {
+      toast.error('Erro ao criar evento')
+    }
   }
 
   return (

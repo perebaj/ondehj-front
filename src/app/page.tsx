@@ -58,14 +58,23 @@ export default function LandingPage() {
           <div className="relative flex flex-col items-center justify-center gap-10 text-center lg:gap-12">
             <h1 className="text-4xl tracking-tight md:-mb-4 lg:text-6xl">
               <span className="font-black italic tracking-tight text-red-500">
-                Todos os eventos{' '}
+                Todos os eventos <br />
               </span>
-              <span>da sua universidade, em um só lugar</span>
+              <span>da sua universidade</span>
+              <br />
+              <span>
+                em um <span> só lugar</span>
+              </span>
             </h1>
             <p className="max-w-md text-center text-xs font-extrabold leading-relaxed text-slate-500 md:text-sm">
-              Confuso com quantidade de coisas para fazer na sua faculdade? Aqui
-              você encontra todos os eventos esportivos, acadêmicos, culturais e
-              festas em um só lugar.
+              <span>
+                Confuso com quantidade de coisas para fazer na sua faculdade?
+              </span>
+              <br />
+              <span>
+                Aqui você encontra todos os eventos esportivos, acadêmicos,
+                culturais e festas em um só lugar.
+              </span>
             </p>
             <ul className="hidden space-y-1 text-slate-500 md:block">
               <li className="flex items-center justify-center gap-2 lg:justify-start">
@@ -84,10 +93,10 @@ export default function LandingPage() {
       <section id="pricing" className="bg-slate-100">
         <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className=" relative z-10 mx-auto flex max-w-5xl flex-col items-center justify-center gap-8  px-8 py-12 lg:gap-12 lg:py-32">
-            <div className="absolute inset-0 flex rotate-12 transform items-center justify-center">
+            <div className="absolute inset-0 flex rotate-12 transform ">
               <span
                 className="text-shadow border-text  p-4 text-8xl font-bold
-               text-red-600"
+              text-red-600"
               >
                 De graça até o final de março
               </span>

@@ -38,7 +38,7 @@ export async function getEvents(): Promise<Event[]> {
       .db('ondehoje')
       .collection<Event>('events')
       .find({
-        createdAt: {
+        eventDate: {
           $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
       })

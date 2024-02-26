@@ -68,10 +68,12 @@ export default function EventForms() {
     },
   })
   const [open, setOpen] = useState(false)
+  const [isButtonLoading, setIsButtonLoading] = useState(false)
   const router = useRouter()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setIsButtonLoading(true)
       const event: Event = {
         name: values.name,
         description: values.description,
@@ -220,7 +222,11 @@ export default function EventForms() {
               )}
             />
             <div className="flex flex-col space-y-4">
-              <Button variant="default" type="submit">
+              <Button
+                variant="default"
+                type="submit"
+                disabled={isButtonLoading}
+              >
                 Confirmar
               </Button>
             </div>

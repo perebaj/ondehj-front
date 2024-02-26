@@ -8,10 +8,10 @@ if (!MONGODB_URL) {
 }
 
 const client = new MongoClient(MONGODB_URL, {
-  connectTimeoutMS: 1000,
-  waitQueueTimeoutMS: 1000,
-  serverSelectionTimeoutMS: 1000,
-  socketTimeoutMS: 1000,
+  connectTimeoutMS: 2000,
+  waitQueueTimeoutMS: 2000,
+  serverSelectionTimeoutMS: 2000,
+  socketTimeoutMS: 2000,
   serverApi: {
     version: ServerApiVersion.v1,
 

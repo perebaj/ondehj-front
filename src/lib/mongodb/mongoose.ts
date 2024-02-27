@@ -30,9 +30,9 @@ export const connectToDatabase = async () => {
     mongoose.connect(MONGODB_URL, {
       dbName: 'ondehoje',
       bufferCommands: false,
-      socketTimeoutMS: 2000,
-      serverSelectionTimeoutMS: 2000,
-      connectTimeoutMS: 2000,
+      socketTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     })
 
   cached.conn = await cached.promise

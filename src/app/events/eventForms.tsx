@@ -150,9 +150,16 @@ export default function EventForms(props: {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
-          {props.variant === 'edit' ? 'Editar Evento' : 'Criar Novo Evento'}
-        </Button>
+        {props.variant === 'edit' ? (
+          <a
+            href="#"
+            className="text-xs no-underline hover:underline hover:decoration-primary md:text-sm"
+          >
+            Editar Evento
+          </a>
+        ) : (
+          <Button>Criar Novo Evento</Button>
+        )}
       </DialogTrigger>
       <DialogContent
         onInteractOutside={(e) => {
@@ -165,7 +172,9 @@ export default function EventForms(props: {
             {props.variant === 'edit' ? 'Editar Evento' : 'Criar Novo Evento'}
           </DialogTitle>
           <DialogDescription>
-            Preencha e compartilhe um novo evento com o seu campus.
+            {props.variant === 'edit'
+              ? 'Edite as informações do evento.'
+              : 'Preencha e compartilhe um novo evento com o seu campus.'}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>

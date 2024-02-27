@@ -44,8 +44,6 @@ export async function getEvents(): Promise<Event[]> {
       })
       .toArray()
 
-    console.log(events)
-
     return events
   } catch (error) {
     console.error('Error getting events', error)

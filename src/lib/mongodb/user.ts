@@ -58,10 +58,9 @@ declare type UpdateUserParams = {
 export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase()
-    console.log('await')
 
     const newUser = await User.create(user)
-    console.log('user created')
+    console.log('New user created:', newUser)
     return JSON.parse(JSON.stringify(newUser))
   } catch (error) {
     handleError(error)
@@ -76,7 +75,7 @@ export async function getUserById(userId: string) {
     const user = await User.findOne({ clerkId: userId })
 
     if (!user) throw new Error('User not found')
-
+    console.log('User found:', user)
     return JSON.parse(JSON.stringify(user))
   } catch (error) {
     handleError(error)
@@ -93,7 +92,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
     })
 
     if (!updatedUser) throw new Error('User update failed')
-
+    console.log('User updated:', updatedUser)
     return JSON.parse(JSON.stringify(updatedUser))
   } catch (error) {
     handleError(error)
@@ -115,6 +114,7 @@ export async function deleteUser(clerkId: string) {
     // Delete user
     const deletedUser = await User.findByIdAndDelete(userToDelete._id)
     revalidatePath('/')
+    console.log('User deleted:', deletedUser)
 
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null
   } catch (error) {

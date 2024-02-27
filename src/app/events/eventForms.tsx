@@ -3,6 +3,7 @@ import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+// import { ObjectId } from 'mongodb'
 import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -41,13 +42,16 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { Event, saveEvent } from '@/lib/mongodb/db'
+import { deleteEvent, editEvent, Event, saveEvent } from '@/lib/mongodb/db'
 import { getUserById } from '@/lib/mongodb/user'
 import { cn } from '@/lib/utils'
+
+import { EventProps } from './event'
+// import { EventProps } from './event'
 const formSchema = z.object({
   name: z.string().min(1, 'Nome do evento é obrigatório'),
   description: z.string().min(1, 'Descrição do evento é obrigatória'),
-  date: z.date({ required_error: 'Data do evento é obrigatória' }),
+  eventDate: z.date({ required_error: 'Data do evento é obrigatória' }),
   instagramURL: z
     .string()
     .regex(
@@ -58,16 +62,15 @@ const formSchema = z.object({
     .or(z.string().length(0)),
   type: z.string(),
 })
+export default function EventForms(props: {
+  defaultValues?: EventProps
+  variant: 'create' | 'edit'
+}) {
+  const defaultValue = props.defaultValues
 
-export default function EventForms() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      description: '',
-      instagramURL: '',
-      type: '',
-    },
+    defaultValues: defaultValue,
   })
   const [open, setOpen] = useState(false)
   const [isButtonLoading, setIsButtonLoading] = useState(false)
@@ -78,24 +81,33 @@ export default function EventForms() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setIsButtonLoading(true)
       if (!userId) redirect('/sign-in')
 
       const mongdbUser = await getUserById(userId)
-
-      console.log(mongdbUser)
-
-      setIsButtonLoading(true)
+      // const eId = new ObjectId(defaultValue?._id)
       const event: Event = {
+        _id: defaultValue?._id,
         name: values.name,
         description: values.description,
         instagramURL: values.instagramURL,
         type: values.type,
-        eventDate: values.date,
+        eventDate: values.eventDate,
         createdAt: new Date(),
         clerkId: mongdbUser.clerkId,
         email: mongdbUser.email,
       }
-      await saveEvent(event)
+
+      if (props.variant === 'edit') {
+        await editEvent(event)
+        toast.success('Evento editado com sucesso!')
+        setOpen(false)
+        router.refresh()
+        setIsButtonLoading(false)
+        return
+      } else {
+        await saveEvent(event)
+      }
 
       toast.success('Evento criado com sucesso!')
       form.reset(
@@ -112,13 +124,35 @@ export default function EventForms() {
       setIsButtonLoading(false)
     } catch (error) {
       toast.error('Erro ao criar evento')
+    } finally {
+      setIsButtonLoading(false)
+    }
+  }
+
+  async function onDelete() {
+    try {
+      setIsButtonLoading(true)
+      if (defaultValue?._id) {
+        await deleteEvent(defaultValue._id)
+        toast.success('Evento deletado com sucesso!')
+        setOpen(false)
+        router.refresh()
+      } else {
+        throw new Error('Evento não encontrado')
+      }
+    } catch (error) {
+      toast.error('Erro ao deletar evento')
+    } finally {
+      setIsButtonLoading(false)
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Criar Novo Evento</Button>
+        <Button>
+          {props.variant === 'edit' ? 'Editar Evento' : 'Criar Novo Evento'}
+        </Button>
       </DialogTrigger>
       <DialogContent
         onInteractOutside={(e) => {
@@ -127,7 +161,9 @@ export default function EventForms() {
         className="max-w-xs lg:max-w-2xl"
       >
         <DialogHeader>
-          <DialogTitle>Criar Novo Evento</DialogTitle>
+          <DialogTitle>
+            {props.variant === 'edit' ? 'Editar Evento' : 'Criar Novo Evento'}
+          </DialogTitle>
           <DialogDescription>
             Preencha e compartilhe um novo evento com o seu campus.
           </DialogDescription>
@@ -196,7 +232,7 @@ export default function EventForms() {
             />
             <FormField
               control={form.control}
-              name="date"
+              name="eventDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Data do evento</FormLabel>
@@ -242,10 +278,23 @@ export default function EventForms() {
                 type="submit"
                 disabled={isButtonLoading}
               >
-                Confirmar
+                {props.variant === 'edit'
+                  ? 'Editar evento'
+                  : 'Criar novo evento'}
               </Button>
             </div>
           </form>
+          {props.variant === 'edit' && (
+            <Button
+              variant="destructive"
+              onClick={() => {
+                onDelete()
+                setOpen(false)
+              }}
+            >
+              Deletar evento
+            </Button>
+          )}
         </Form>
       </DialogContent>
     </Dialog>

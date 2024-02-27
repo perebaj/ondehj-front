@@ -1,7 +1,7 @@
 ## run lint
 .PHONY: lint
 lint:
-	npx eslint .
+	npx eslint . --fix
 
 ## Install dependencies
 .PHONY: install

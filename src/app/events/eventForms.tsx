@@ -2,7 +2,7 @@
 import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { CalendarIcon, Edit, Settings2 } from 'lucide-react'
+import { CalendarIcon } from 'lucide-react'
 // import { ObjectId } from 'mongodb'
 import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'

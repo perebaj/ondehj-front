@@ -28,6 +28,8 @@ export type Event = {
   name: string
   instagramURL?: string
   type: string
+  clerkId: string
+  email: string
 }
 
 export async function getEvents(): Promise<Event[]> {

@@ -1,8 +1,9 @@
 'use client'
+import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -41,6 +42,7 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Event, saveEvent } from '@/lib/mongodb/db'
+import { getUserById } from '@/lib/mongodb/user'
 import { cn } from '@/lib/utils'
 const formSchema = z.object({
   name: z.string().min(1, 'Nome do evento é obrigatório'),
@@ -71,8 +73,17 @@ export default function EventForms() {
   const [isButtonLoading, setIsButtonLoading] = useState(false)
   const router = useRouter()
 
+  const { userId } = useAuth()
+  // if (!userId) redirect('/sign-in')
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      if (!userId) redirect('/sign-in')
+
+      const mongdbUser = await getUserById(userId)
+
+      console.log(mongdbUser)
+
       setIsButtonLoading(true)
       const event: Event = {
         name: values.name,
@@ -81,6 +92,8 @@ export default function EventForms() {
         type: values.type,
         eventDate: values.date,
         createdAt: new Date(),
+        clerkId: mongdbUser.clerkId,
+        email: mongdbUser.email,
       }
       await saveEvent(event)
 
@@ -211,7 +224,10 @@ export default function EventForms() {
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) => date < new Date('1900-01-01')}
+                        disabled={(date) =>
+                          date <
+                          new Date(new Date().setDate(new Date().getDate() - 1))
+                        }
                         initialFocus
                       />
                     </PopoverContent>

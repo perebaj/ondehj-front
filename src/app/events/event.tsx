@@ -13,15 +13,7 @@ import { ObjectId } from 'mongodb'
 import { Event } from '@/lib/mongodb/db'
 
 import EventForms from './eventForms'
-// export type EventProps = {
-//   id: string
-//   name: string
-//   description: string
-//   eventDate: Date
-//   instagramURL?: string
-//   type: string
-//   key: string
-// }
+
 export interface EventProps {
   _id: ObjectId
   name: string
@@ -61,7 +53,7 @@ export default function Event(props: EventProps) {
 
   return (
     <div className="relative flex flex-col items-start justify-start gap-1 rounded-lg border p-6 shadow-md">
-      <div className="flex w-full items-center justify-between gap-2">
+      <div className="flex w-full items-center justify-between gap-8 pb-2">
         <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50">
           <TypeIcon className="mr-1.5 h-4 w-4" />
           {TypeName}

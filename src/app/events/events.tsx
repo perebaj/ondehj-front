@@ -21,8 +21,8 @@ export default function Events(props: EventsProps) {
           <EventForms variant="create" />
         </div>
       </div>
-      <div className="container grid max-w-6xl justify-center gap-4 px-4 py-4 md:px-6 md:py-6">
-        <div className="grid grid-cols-1 items-stretch justify-center gap-4 md:grid-cols-2">
+      <div className="container grid justify-center gap-4 px-4 py-4  md:px-6 md:py-6">
+        <div className="grid max-w-full grid-cols-1 items-stretch justify-center gap-4 md:max-w-6xl md:grid-cols-2">
           {props.events.map((event) => (
             <Event
               eventProps={{

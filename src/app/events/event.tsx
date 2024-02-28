@@ -68,7 +68,7 @@ export default function Event(props: {
       <h3 className="text-2xl font-bold leading-tight text-blue-500">
         {props.eventProps.name}
       </h3>
-      <p className="whitespace-pre-wrap text-sm/relaxed text-gray-500 dark:text-gray-400">
+      <p className="max-w-72 whitespace-pre-wrap break-words text-sm/relaxed text-gray-500 dark:text-gray-400 md:max-w-max">
         {props.eventProps.description}
       </p>
       <time className="mt-auto self-start text-sm font-medium text-gray-500 dark:text-gray-400">

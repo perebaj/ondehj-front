@@ -162,7 +162,7 @@ export default function EventForms(props: {
         onInteractOutside={(e) => {
           e.preventDefault()
         }}
-        className="max-w-xs lg:max-w-2xl"
+        className="max-h-[90vh] max-w-[90vw] overflow-y-auto lg:max-w-2xl"
       >
         <DialogHeader>
           <DialogTitle>

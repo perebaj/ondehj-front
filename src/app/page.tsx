@@ -15,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-// import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 export default function LandingPage() {
   return (
     <div>

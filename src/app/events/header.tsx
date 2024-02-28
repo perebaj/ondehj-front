@@ -1,10 +1,6 @@
 'use client'
 import { UserButton } from '@clerk/nextjs'
 
-// import { CreditCard } from 'lucide-react'
-// import Billing from '@/app/billing'
-// import { Button } from '@/components/ui/button'
-// import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 export default function EventsHeader() {
   return (
     <header className="border-b bg-slate-50">

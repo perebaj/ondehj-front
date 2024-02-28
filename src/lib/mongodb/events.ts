@@ -14,6 +14,7 @@ export async function getEvents(): Promise<GetEvent[]> {
           $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
       })
+      .sort({ eventDate: 1 }) // Sort by eventDate in descending order
       .toArray()
 
     return events

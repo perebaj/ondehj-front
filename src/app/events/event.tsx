@@ -1,3 +1,4 @@
+'use client'
 import 'moment/locale/pt-br'
 
 import {
@@ -9,6 +10,7 @@ import {
 } from 'lucide-react'
 import moment from 'moment'
 import { ObjectId } from 'mongodb'
+import { useState } from 'react'
 
 import { Event } from '@/lib/mongodb/db'
 
@@ -29,7 +31,7 @@ export default function Event(props: {
 }) {
   moment.locale('pt-br')
   const date = moment(props.eventProps.eventDate).format('LL')
-
+  const [showFullDescription, setShowFullDescription] = useState(false)
   let TypeIcon
   let TypeName
   switch (props.eventProps.type) {
@@ -72,7 +74,18 @@ export default function Event(props: {
         {props.eventProps.name}
       </h3>
       <p className="max-w-72 whitespace-pre-wrap break-words text-sm/relaxed text-gray-500 dark:text-gray-400 md:max-w-max">
-        {props.eventProps.description}
+        {showFullDescription
+          ? props.eventProps.description
+          : props.eventProps.description.slice(0, 100) + '...'}{' '}
+        {/* Display only a portion of the description */}
+        {props.eventProps.description.length > 100 && ( // Check if description is longer than 100 characters
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => setShowFullDescription(!showFullDescription)}
+          >
+            {showFullDescription ? 'Ver menos' : 'Ver mais'}
+          </button>
+        )}
       </p>
       {props.eventProps.instagramURL && (
         <a

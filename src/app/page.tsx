@@ -1,4 +1,4 @@
-import { Check, PartyPopper } from 'lucide-react'
+import { PartyPopper } from 'lucide-react'
 
 import {
   Accordion,
@@ -7,14 +7,14 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+// import {
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardFooter,
+//   CardHeader,
+//   CardTitle,
+// } from '@/components/ui/card'
 export default function LandingPage() {
   return (
     <div>
@@ -55,7 +55,7 @@ export default function LandingPage() {
       <section id="info">
         <div className="relative z-10  mx-auto flex  max-w-5xl flex-col items-center justify-center gap-16 px-8 py-12 lg:gap-20 lg:py-32">
           <div className="relative flex flex-col items-center justify-center gap-10 text-center lg:gap-12">
-            <h1 className="text-4xl tracking-tight md:-mb-4 lg:text-6xl">
+            <h1 className="text-4xl tracking-tight md:-mb-4 lg:text-7xl">
               <span className="font-black italic tracking-tight text-red-500">
                 Todos os eventos <br />
               </span>
@@ -89,7 +89,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <section id="pricing" className="bg-slate-100">
+      {/* <section id="pricing" className="bg-slate-100">
         <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className=" relative z-10 mx-auto flex max-w-5xl flex-col items-center justify-center gap-8  px-8 py-12 lg:gap-12 lg:py-32">
             <div className="absolute inset-0 flex rotate-12 transform ">
@@ -149,7 +149,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <section id="faq">
         <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className="flex basis-1/2 flex-col text-left">

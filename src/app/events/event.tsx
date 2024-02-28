@@ -1,4 +1,4 @@
-import 'moment/dist/locale/pt-br'
+import 'moment/locale/pt-br'
 
 import {
   ChevronRightIcon,
@@ -28,7 +28,7 @@ export default function Event(props: {
   edit: boolean
 }) {
   moment.locale('pt-br')
-  const date = moment(props.eventProps.eventDate).format('LLL')
+  const date = moment(props.eventProps.eventDate).format('LL')
 
   let TypeIcon
   let TypeName
@@ -65,15 +65,15 @@ export default function Event(props: {
           <EventForms defaultValues={props.eventProps} variant="edit" />
         ) : null}
       </div>
-      <h3 className="text-2xl font-bold leading-tight text-blue-500">
+      <time className="self-start text-base font-extrabold  text-gray-500 dark:text-gray-400">
+        {date}
+      </time>
+      <h3 className="text-3xl font-bold leading-tight text-blue-500">
         {props.eventProps.name}
       </h3>
       <p className="max-w-72 whitespace-pre-wrap break-words text-sm/relaxed text-gray-500 dark:text-gray-400 md:max-w-max">
         {props.eventProps.description}
       </p>
-      <time className="mt-auto self-start text-sm font-medium text-gray-500 dark:text-gray-400">
-        {date}
-      </time>
       {props.eventProps.instagramURL && (
         <a
           className="inline-flex items-center no-underline hover:underline"

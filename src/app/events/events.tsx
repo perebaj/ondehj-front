@@ -1,10 +1,13 @@
-import { getEvents } from '@/lib/mongodb/db'
+import { GetEvent } from '@/lib/mongodb/db'
 
 import Event from './event'
 import EventForms from './eventForms'
-export default async function Events() {
-  const events = await getEvents()
+export type EventsProps = {
+  events: GetEvent[]
+  clerkId: string
+}
 
+export default function Events(props: EventsProps) {
   return (
     <div className="w-full py-10 lg:py-14">
       <div className="container grid items-center gap-4 px-4 py-4 text-center md:px-6 md:py-6">
@@ -20,16 +23,18 @@ export default async function Events() {
       </div>
       <div className="container grid max-w-6xl justify-center gap-4 px-4 py-4 md:px-6 md:py-6">
         <div className="grid grid-cols-1 items-stretch justify-center gap-4 md:grid-cols-2">
-          {events.map((event) => (
+          {props.events.map((event) => (
             <Event
-              _id={event._id}
-              // _id={event._id.toString()}
-              eventDate={event.eventDate}
-              description={event.description}
-              name={event.name}
-              instagramURL={event.instagramURL}
-              type={event.type}
+              eventProps={{
+                _id: event._id,
+                name: event.name,
+                description: event.description,
+                eventDate: event.eventDate,
+                type: event.type,
+                instagramURL: event.instagramURL,
+              }}
               key={event._id.toString()}
+              edit={event.clerkId === props.clerkId} // Attribute true when event.clerkId is equal to user.clerkId, false otherwise
             />
           ))}
         </div>

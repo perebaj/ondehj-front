@@ -1,44 +1,10 @@
 'use server'
 
-import { model, models, Schema } from 'mongoose'
+import { DeleteResult, WithId } from 'mongodb'
 import { revalidatePath } from 'next/cache'
 
 import { handleError } from '../utils'
-// import User from '../database/models/user.model'
-import { connectToDatabase } from './mongoose'
-
-const UserSchema = new Schema({
-  clerkId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  photo: {
-    type: String,
-    required: true,
-  },
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  planId: {
-    type: Number,
-    default: 1,
-  },
-  creditBalance: {
-    type: Number,
-    default: 10,
-  },
-})
-
-const User = models?.User || model('User', UserSchema, 'users')
+import { client } from './db'
 
 declare type CreateUserParams = {
   clerkId: string
@@ -54,89 +20,102 @@ declare type UpdateUserParams = {
   photo?: string
 }
 
-// CREATE
 export async function createUser(user: CreateUserParams) {
   try {
-    await connectToDatabase()
+    await client.connect()
 
-    const newUser = await User.create(user)
-    console.log('New user created:', newUser)
-    return JSON.parse(JSON.stringify(newUser))
+    await client
+      .db('ondehoje')
+      .collection<CreateUserParams>('users')
+      .insertOne(user)
+    console.log('user created')
   } catch (error) {
     handleError(error)
   }
 }
 
-// READ
-export async function getUserById(userId: string) {
+export async function getUserById(
+  userId: string,
+): Promise<WithId<CreateUserParams> | null | undefined> {
   try {
-    await connectToDatabase()
+    await client.connect()
 
-    const user = await User.findOne({ clerkId: userId })
+    const user = await client
+      .db('ondehoje')
+      .collection<CreateUserParams>('users')
+      .findOne({ clerkId: userId })
 
-    if (!user) throw new Error('User not found')
-    console.log('User found:', user)
-    return JSON.parse(JSON.stringify(user))
+    console.log('User found')
+    return user
   } catch (error) {
     handleError(error)
   }
 }
 
-// UPDATE
-export async function updateUser(clerkId: string, user: UpdateUserParams) {
+export async function updateUser(
+  clerkId: string,
+  user: UpdateUserParams,
+): Promise<CreateUserParams | undefined> {
   try {
-    await connectToDatabase()
+    await client.connect()
 
-    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
-      new: true,
-    })
+    const updatedUser = await client
+      .db('ondehoje')
+      .collection<CreateUserParams>('users')
+      .findOneAndUpdate(
+        { clerkId },
+        { $set: user },
+        { returnDocument: 'after' },
+      )
 
     if (!updatedUser) throw new Error('User update failed')
-    console.log('User updated:', updatedUser)
-    return JSON.parse(JSON.stringify(updatedUser))
+    console.log('User updated')
+    return updatedUser
   } catch (error) {
     handleError(error)
   }
 }
 
-// DELETE
-export async function deleteUser(clerkId: string) {
+export async function deleteUser(
+  clerkId: string,
+): Promise<DeleteResult | undefined> {
   try {
-    await connectToDatabase()
+    await client.connect()
 
-    // Find user to delete
-    const userToDelete = await User.findOne({ clerkId })
+    const userToDelete = await getUserById(clerkId)
 
     if (!userToDelete) {
       throw new Error('User not found')
     }
 
-    // Delete user
-    const deletedUser = await User.findByIdAndDelete(userToDelete._id)
+    const deletedUser = await client
+      .db('ondehoje')
+      .collection<CreateUserParams>('users')
+      .deleteOne({ clerkId: userToDelete.clerkId })
+
     revalidatePath('/')
-    console.log('User deleted:', deletedUser)
+    console.log('User deleted')
 
-    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null
+    return deletedUser
   } catch (error) {
     handleError(error)
   }
 }
 
-// USE CREDITS
-export async function updateCredits(userId: string, creditFee: number) {
-  try {
-    await connectToDatabase()
+// export async function updateCredits(userId: string, creditFee: number) {
+//   try {
+//     await connectToDatabase()
 
-    const updatedUserCredits = await User.findOneAndUpdate(
-      { _id: userId },
-      { $inc: { creditBalance: creditFee } },
-      { new: true },
-    )
+//     const updatedUserCredits = await User.findOneAndUpdate(
+//       { _id: userId },
+//       { $inc: { creditBalance: creditFee } },
+//       { new: true },
+//     )
 
-    if (!updatedUserCredits) throw new Error('User credits update failed')
+//     if (!updatedUserCredits) throw new Error('User credits update failed')
 
-    return JSON.parse(JSON.stringify(updatedUserCredits))
-  } catch (error) {
-    handleError(error)
-  }
-}
+//     return JSON.parse(JSON.stringify(updatedUserCredits))
+//   } catch (error) {
+//     handleError(error)
+//   }
+// }

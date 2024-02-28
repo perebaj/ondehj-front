@@ -3,7 +3,6 @@ import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
-// import { ObjectId } from 'mongodb'
 import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -42,12 +41,12 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { deleteEvent, editEvent, Event, saveEvent } from '@/lib/mongodb/db'
+import { Event } from '@/lib/mongodb/db'
+import { deleteEvent, editEvent, saveEvent } from '@/lib/mongodb/events'
 import { getUserById } from '@/lib/mongodb/user'
 import { cn } from '@/lib/utils'
 
 import { EventProps } from './event'
-// import { EventProps } from './event'
 const formSchema = z.object({
   name: z.string().min(1, 'Nome do evento é obrigatório'),
   description: z.string().min(1, 'Descrição do evento é obrigatória'),
@@ -77,7 +76,6 @@ export default function EventForms(props: {
   const router = useRouter()
 
   const { userId } = useAuth()
-  // if (!userId) redirect('/sign-in')
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -85,7 +83,6 @@ export default function EventForms(props: {
       if (!userId) redirect('/sign-in')
 
       const mongdbUser = await getUserById(userId)
-      // const eId = new ObjectId(defaultValue?._id)
       const event: Event = {
         _id: defaultValue?._id,
         name: values.name,
@@ -94,8 +91,8 @@ export default function EventForms(props: {
         type: values.type,
         eventDate: values.eventDate,
         createdAt: new Date(),
-        clerkId: mongdbUser.clerkId,
-        email: mongdbUser.email,
+        clerkId: mongdbUser?.clerkId,
+        email: mongdbUser?.email,
       }
 
       if (props.variant === 'edit') {

@@ -3,7 +3,6 @@ import { QRCodeSVG } from 'qrcode.react'
 
 import { Button } from '@/components/ui/button'
 import {
-  // Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,

@@ -23,13 +23,16 @@ export interface EventProps {
   instagramURL?: string
 }
 
-export default function Event(props: EventProps) {
+export default function Event(props: {
+  eventProps: EventProps
+  edit: boolean
+}) {
   moment.locale('pt-br')
-  const date = moment(props.eventDate).format('LLL')
+  const date = moment(props.eventProps.eventDate).format('LLL')
 
   let TypeIcon
   let TypeName
-  switch (props.type) {
+  switch (props.eventProps.type) {
     case 'academico':
       TypeIcon = GraduationCap
       TypeName = 'Acadêmico'
@@ -58,21 +61,23 @@ export default function Event(props: EventProps) {
           <TypeIcon className="mr-1.5 h-4 w-4" />
           {TypeName}
         </span>
-        <EventForms defaultValues={props} variant="edit" />
+        {props.edit ? (
+          <EventForms defaultValues={props.eventProps} variant="edit" />
+        ) : null}
       </div>
       <h3 className="text-2xl font-bold leading-tight text-blue-500">
-        {props.name}
+        {props.eventProps.name}
       </h3>
       <p className="whitespace-pre-wrap text-sm/relaxed text-gray-500 dark:text-gray-400">
-        {props.description}
+        {props.eventProps.description}
       </p>
       <time className="mt-auto self-start text-sm font-medium text-gray-500 dark:text-gray-400">
         {date}
       </time>
-      {props.instagramURL && (
+      {props.eventProps.instagramURL && (
         <a
           className="inline-flex items-center no-underline hover:underline"
-          href={props.instagramURL}
+          href={props.eventProps.instagramURL}
         >
           Veja no Instagram
           <ChevronRightIcon className="ml-1.5 inline-block h-4 w-4" />

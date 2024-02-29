@@ -5,6 +5,7 @@ import EventForms from './eventForms'
 export type EventsProps = {
   events: GetEvent[]
   clerkId: string
+  role: string | unknown
 }
 
 export default function Events(props: EventsProps) {
@@ -18,7 +19,7 @@ export default function Events(props: EventsProps) {
           <p className="mx-auto max-w-[700px] py-4 text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Descubra e participe de eventos que acontecem no seu campus.
           </p>
-          <EventForms variant="create" />
+          {props.role === 'fullAdmin' ? <EventForms variant="create" /> : null}
         </div>
       </div>
       <div className="container grid justify-center gap-4 px-4 py-4  md:px-6 md:py-6">

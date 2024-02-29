@@ -24,6 +24,7 @@ export interface EventProps {
   eventDate: Date
   type: string
   instagramURL?: string
+  role?: string
 }
 
 export default function Event(props: {

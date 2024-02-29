@@ -12,12 +12,14 @@ declare type CreateUserParams = {
   firstName: string
   lastName: string
   photo: string
+  role: string | unknown
 }
 
 declare type UpdateUserParams = {
   firstName?: string
   lastName?: string
   photo?: string
+  role?: string | unknown
 }
 
 export async function createUser(user: CreateUserParams) {

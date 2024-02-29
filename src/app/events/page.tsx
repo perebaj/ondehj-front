@@ -27,7 +27,7 @@ export default async function EventsPage() {
     <div>
       <Toaster richColors closeButton />
       <EventsHeader />
-      <Events events={events} clerkId={user?.clerkId} />
+      <Events events={events} clerkId={user?.clerkId} role={user?.role} />
     </div>
   )
 }

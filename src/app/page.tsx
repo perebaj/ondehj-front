@@ -41,9 +41,14 @@ export default function LandingPage() {
             </a>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Button size={'sm'}>
-              <a href="/events">Entrar</a>
-            </Button>
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button size={'sm'}>
+                <a href="/events">Entrar</a>
+              </Button>
+            </motion.button>
           </div>
         </nav>
       </header>
@@ -60,11 +65,11 @@ export default function LandingPage() {
                   Todos os eventos, <span> </span>
                   <br />
                 </span>
-                <span className="text-4xl lg:text-8xl">
+                <span className="text-4xl text-slate-500 lg:text-8xl">
                   em um <span> só lugar</span>
                 </span>
               </h1>
-              <p className="max-w-72 text-center text-base font-extrabold leading-relaxed text-slate-500 lg:max-w-full lg:text-2xl ">
+              <p className="max-w-72 text-center text-base font-extrabold leading-relaxed text-slate-400 lg:max-w-full lg:text-2xl ">
                 <span>
                   Confuso com quantidade de coisas para fazer na sua faculdade?
                 </span>

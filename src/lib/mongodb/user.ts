@@ -26,10 +26,7 @@ export async function createUser(user: CreateUserParams) {
   try {
     await client.connect()
 
-    await client
-      .db('ondehoje')
-      .collection<CreateUserParams>('users')
-      .insertOne(user)
+    await client.db().collection<CreateUserParams>('users').insertOne(user)
     console.log('user created')
   } catch (error) {
     handleError(error)
@@ -43,7 +40,7 @@ export async function getUserById(
     await client.connect()
 
     const user = await client
-      .db('ondehoje')
+      .db()
       .collection<CreateUserParams>('users')
       .findOne({ clerkId: userId })
 
@@ -62,7 +59,7 @@ export async function updateUser(
     await client.connect()
 
     const updatedUser = await client
-      .db('ondehoje')
+      .db()
       .collection<CreateUserParams>('users')
       .findOneAndUpdate(
         { clerkId },
@@ -91,7 +88,7 @@ export async function deleteUser(
     }
 
     const deletedUser = await client
-      .db('ondehoje')
+      .db()
       .collection<CreateUserParams>('users')
       .deleteOne({ clerkId: userToDelete.clerkId })
 

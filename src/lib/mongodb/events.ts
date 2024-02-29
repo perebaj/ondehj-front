@@ -7,7 +7,7 @@ export async function getEvents(): Promise<GetEvent[]> {
   try {
     await client.connect()
     const events = await client
-      .db('ondehoje')
+      .db()
       .collection<GetEvent>('events')
       .find({
         eventDate: {
@@ -29,7 +29,7 @@ export async function getEvents(): Promise<GetEvent[]> {
 export async function saveEvent(event: Event): Promise<void> {
   try {
     await client.connect()
-    await client.db('ondehoje').collection<Event>('events').insertOne(event)
+    await client.db().collection<Event>('events').insertOne(event)
     console.log('Event saved')
   } catch (error) {
     console.error('Error saving event', error)
@@ -45,7 +45,7 @@ export async function editEvent(event: Event): Promise<void> {
     const o_id = new ObjectId(event._id)
     delete event._id
     await client
-      .db('ondehoje')
+      .db()
       .collection<Event>('events')
       .updateOne({ _id: o_id }, { $set: event })
     console.log('Event edited')
@@ -63,10 +63,7 @@ export async function deleteEvent(id: ObjectId): Promise<void> {
     await client.connect()
     const o_id = new ObjectId(id)
 
-    await client
-      .db('ondehoje')
-      .collection<Event>('events')
-      .deleteOne({ _id: o_id })
+    await client.db().collection<Event>('events').deleteOne({ _id: o_id })
     console.log('Event deleted')
   } catch (error) {
     console.error('Error deleting event', error)

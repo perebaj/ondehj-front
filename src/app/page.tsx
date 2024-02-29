@@ -109,7 +109,7 @@ export default function LandingPage() {
         </ul>
         <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
           <Button className=" text-lg text-white" size={'lg'}>
-            <Link href="https://www.instagram.com/ondehoje/">
+            <Link href="https://www.instagram.com/ondehoje.app/">
               Entre em contato!
             </Link>
           </Button>

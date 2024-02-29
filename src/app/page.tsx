@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { PartyPopper } from 'lucide-react'
+import Link from 'next/link'
 
 import {
   Accordion,
@@ -9,7 +10,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-
 export default function LandingPage() {
   return (
     <div>
@@ -22,13 +22,13 @@ export default function LandingPage() {
             </a>
           </div>
           <div className="hidden lg:flex lg:items-center lg:justify-center lg:gap-12">
-            <a href="/#pricing" className="no-underline hover:underline">
-              Preço
+            <a href="/#share" className="no-underline hover:underline">
+              Quero Compartilhar
             </a>
             <a
               className="no-underline hover:underline"
               title="FAQ"
-              href="/#faq"
+              href="/#share"
             >
               FAQ
             </a>
@@ -46,14 +46,14 @@ export default function LandingPage() {
               whileTap={{ scale: 0.9 }}
             >
               <Button size={'sm'}>
-                <a href="/events">Entrar</a>
+                <Link href={'/events'}>Entrar</Link>
               </Button>
             </motion.button>
           </div>
         </nav>
       </header>
       <section id="info">
-        <div className="relative z-10 mx-auto  flex w-full  flex-col items-center justify-center gap-16 p-1 lg:gap-20 lg:px-8 lg:py-32">
+        <div className="py-18 relative z-10  mx-auto flex w-full flex-col items-center justify-center gap-16 px-4  py-8 lg:gap-20 lg:px-8 lg:py-32">
           <motion.div
             initial={{ scale: 0.8 }}
             animate={{ opacity: 1, scale: 1.0 }}
@@ -61,11 +61,11 @@ export default function LandingPage() {
           >
             <div className="relative flex flex-col items-center justify-center gap-8 text-center lg:gap-12">
               <h1 className="gap-2 tracking-tight ">
-                <span className="max-w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text px-1 text-5xl font-black italic tracking-tight text-transparent lg:text-9xl">
-                  Todos os eventos, <span> </span>
+                <span className="max-w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text px-1 text-[40px] font-black italic tracking-tight text-transparent lg:text-9xl">
+                  Todos os eventos,
                   <br />
                 </span>
-                <span className="text-4xl text-slate-500 lg:text-8xl">
+                <span className="text-[32px] text-slate-500 lg:text-8xl">
                   em um <span> só lugar</span>
                 </span>
               </h1>
@@ -87,17 +87,35 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.9 }}
               >
                 <Button size={'lg'} className="">
-                  <a href="/events" className="text-sm lg:text-base">
+                  <Link className="text-sm lg:text-base" href="/events">
                     Onde é o rolê hoje?
-                  </a>
+                  </Link>
                 </Button>
               </motion.button>
             </div>
           </motion.div>
         </div>
       </section>
+      <section id="share" className="bg-slate-100"></section>
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-8 py-12 lg:py-32">
+        <h1 className="flex items-center justify-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text px-4 pb-6 text-center text-[40px] font-black tracking-tight text-transparent lg:max-w-7xl lg:text-7xl">
+          Compartilhe eventos
+        </h1>
+        <ul className="flex  flex-col items-start justify-start space-y-2 pb-14 text-lg lg:text-xl">
+          <li>⚽ Esportivos</li>
+          <li>📚 Acadêmicos</li>
+          <li>🎥 Culturais</li>
+          <li>🎉 & Festas</li>
+        </ul>
+        <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+          <Button className=" text-lg text-white" size={'lg'}>
+            <Link href="https://www.instagram.com/ondehoje/">
+              Entre em contato
+            </Link>
+          </Button>
+        </motion.button>
+      </div>
       {/* <section id="pricing" className="bg-slate-100">
-        <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-24 md:flex-row">
           <div className=" relative z-10 mx-auto flex max-w-5xl flex-col items-center justify-center gap-8  px-8 py-12 lg:gap-12 lg:py-32">
             <div className="absolute inset-0 flex rotate-12 transform ">
               <span
@@ -194,26 +212,23 @@ export default function LandingPage() {
                   </p>
                 </AccordionContent>
               </AccordionItem>
-              {/* <AccordionItem value="item-3">
+              <AccordionItem value="item-3">
                 <AccordionTrigger className="text-start font-bold text-primary">
-                  O Onde Hoje é pago?
+                  Como posso compartilhar um evento no onde hoje?
                 </AccordionTrigger>
                 <AccordionContent>
                   <p>
-                    <span className="font-extrabold">
-                      De graça até final de março, mas
-                    </span>{' '}
-                    <span className="font-bold">Sim. </span>
-                    <br />O onde hoje cobra uma
-                    <span className="font-bold">
-                      {' '}
-                      um valor único de R$ 30,00,{' '}
-                    </span>
-                    <span> por usuário. </span>
-                    Pague uma vez, use para sempre
+                    <span className="font-bold">É simples. </span> Basta{' '}
+                    <Link
+                      href="https://www.instagram.com/ondehoje/"
+                      className="font-bold text-blue-500 no-underline hover:underline"
+                    >
+                      entrar em contato
+                    </Link>
+                    , passar as informações do evento e pronto!
                   </p>
                 </AccordionContent>
-              </AccordionItem> */}
+              </AccordionItem>
               <AccordionItem value="item-4">
                 <AccordionTrigger className="text-start font-bold text-primary">
                   É possivel vender ingressos no Onde Hoje?

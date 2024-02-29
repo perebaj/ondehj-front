@@ -16,15 +16,15 @@ export default function LandingPage() {
       <header className="bg-slate-50">
         <nav className="mx-auto flex max-w-7xl items-center justify-center px-8 py-3">
           <div className="flex lg:flex-1">
-            <a href="/" className="flex shrink-0 items-center gap-2">
+            <Link href="/" className="flex shrink-0 items-center gap-2">
               <PartyPopper size={28} />
               <span className="text-lg font-bold">Onde Hoje?</span>
-            </a>
+            </Link>
           </div>
           <div className="hidden lg:flex lg:items-center lg:justify-center lg:gap-12">
-            <a href="/#share" className="no-underline hover:underline">
+            <Link href="/#share" className="no-underline hover:underline">
               Quero Compartilhar
-            </a>
+            </Link>
             <a
               className="no-underline hover:underline"
               title="FAQ"
@@ -110,7 +110,7 @@ export default function LandingPage() {
         <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
           <Button className=" text-lg text-white" size={'lg'}>
             <Link href="https://www.instagram.com/ondehoje/">
-              Entre em contato
+              Entre em contato!
             </Link>
           </Button>
         </motion.button>

@@ -1,3 +1,5 @@
+'use client'
+import { motion } from 'framer-motion'
 import { PartyPopper } from 'lucide-react'
 
 import {
@@ -7,14 +9,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from '@/components/ui/card'
+
 export default function LandingPage() {
   return (
     <div>
@@ -46,47 +41,59 @@ export default function LandingPage() {
             </a>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Button size={'sm'}>
-              <a href="/events">Entrar</a>
-            </Button>
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button size={'sm'}>
+                <a href="/events">Entrar</a>
+              </Button>
+            </motion.button>
           </div>
         </nav>
       </header>
       <section id="info">
-        <div className="relative z-10  mx-auto flex  max-w-5xl flex-col items-center justify-center gap-16 px-8 py-12 lg:gap-20 lg:py-32">
-          <div className="relative flex flex-col items-center justify-center gap-10 text-center lg:gap-12">
-            <h1 className="text-4xl tracking-tight md:-mb-4 lg:text-7xl">
-              <span className="font-black italic tracking-tight text-red-500">
-                Todos os eventos <br />
-              </span>
-              <span>da sua universidade</span>
-              <br />
-              <span>
-                em um <span> só lugar</span>
-              </span>
-            </h1>
-            <p className="max-w-md text-center text-xs font-extrabold leading-relaxed text-slate-500 md:text-sm">
-              <span>
-                Confuso com quantidade de coisas para fazer na sua faculdade?
-              </span>
-              <br />
-              <span>
-                Aqui você encontra todos os eventos esportivos, acadêmicos,
-                culturais e festas em um só lugar.
-              </span>
-            </p>
-            <ul className="hidden space-y-1 text-slate-500 md:block">
-              <li className="flex items-center justify-center gap-2 lg:justify-start">
-                <span>🎉</span> Fique por dentro do que está acontecendo
-              </li>
-              <li className="flex items-center justify-center gap-2 lg:justify-start">
-                <span>📢</span> Promova e compartilhe seus eventos favoritos
-              </li>
-            </ul>
-            <Button size={'lg'}>
-              <a href="/events">Onde é o rolê hoje?</a>
-            </Button>
-          </div>
+        <div className="relative z-10 mx-auto  flex w-full  flex-col items-center justify-center gap-16 p-1 lg:gap-20 lg:px-8 lg:py-32">
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1.0 }}
+            transition={{ ease: 'easeOut', duration: 1 }}
+          >
+            <div className="relative flex flex-col items-center justify-center gap-8 text-center lg:gap-12">
+              <h1 className="gap-2 tracking-tight ">
+                <span className="max-w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text px-1 text-5xl font-black italic tracking-tight text-transparent lg:text-9xl">
+                  Todos os eventos, <span> </span>
+                  <br />
+                </span>
+                <span className="text-4xl text-slate-500 lg:text-8xl">
+                  em um <span> só lugar</span>
+                </span>
+              </h1>
+              <p className="max-w-72 text-center text-base font-extrabold leading-relaxed text-slate-400 lg:max-w-full lg:text-2xl ">
+                <span>
+                  Confuso com quantidade de coisas para fazer na sua faculdade?
+                </span>
+              </p>
+              <ul className="max-w-xl space-y-1 text-sm text-slate-500 md:block lg:text-2xl">
+                <li className="flex items-center justify-center gap-2 lg:justify-start">
+                  <span>🎉</span> Fique por dentro do que está acontecendo
+                </li>
+                <li className="flex items-center justify-center gap-2 lg:justify-start">
+                  <span>📢</span> Promova e compartilhe seus eventos favoritos
+                </li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Button size={'lg'} className="">
+                  <a href="/events" className="text-sm lg:text-base">
+                    Onde é o rolê hoje?
+                  </a>
+                </Button>
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </section>
       {/* <section id="pricing" className="bg-slate-100">
@@ -187,7 +194,7 @@ export default function LandingPage() {
                   </p>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-3">
+              {/* <AccordionItem value="item-3">
                 <AccordionTrigger className="text-start font-bold text-primary">
                   O Onde Hoje é pago?
                 </AccordionTrigger>
@@ -206,7 +213,7 @@ export default function LandingPage() {
                     Pague uma vez, use para sempre
                   </p>
                 </AccordionContent>
-              </AccordionItem>
+              </AccordionItem> */}
               <AccordionItem value="item-4">
                 <AccordionTrigger className="text-start font-bold text-primary">
                   É possivel vender ingressos no Onde Hoje?

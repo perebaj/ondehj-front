@@ -48,7 +48,7 @@ export default function LandingPage() {
         </nav>
       </header>
       <section id="info">
-        <div className="max-w-9xl relative z-10  mx-auto flex  flex-col items-center justify-center gap-16 p-4 lg:gap-20 lg:px-8 lg:py-32">
+        <div className="relative z-10 mx-auto  flex w-full  flex-col items-center justify-center gap-16 px-0 py-2 lg:gap-20 lg:px-8 lg:py-32">
           <motion.div
             initial={{ scale: 0.8 }}
             animate={{ opacity: 1, scale: 1.0 }}
@@ -56,7 +56,7 @@ export default function LandingPage() {
           >
             <div className="relative flex flex-col items-center justify-center gap-8 text-center lg:gap-12">
               <h1 className="gap-2 tracking-tight ">
-                <span className="... bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-red-500 to-90% bg-clip-text px-2 text-5xl font-black italic tracking-tight text-transparent lg:text-9xl">
+                <span className="max-w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-red-500 to-90% bg-clip-text px-2 text-5xl font-black italic tracking-tight text-transparent lg:text-9xl">
                   Todos os eventos, <span> </span>
                   <br />
                 </span>

@@ -220,7 +220,7 @@ export default function LandingPage() {
                   <p>
                     <span className="font-bold">É simples. </span> Basta{' '}
                     <Link
-                      href="https://www.instagram.com/ondehoje/"
+                      href="https://www.instagram.com/ondehoje.app/"
                       className="font-bold text-blue-500 no-underline hover:underline"
                     >
                       entrar em contato

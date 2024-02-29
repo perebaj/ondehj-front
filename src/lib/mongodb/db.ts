@@ -29,6 +29,7 @@ export type Event = {
   type?: string
   clerkId?: string
   email?: string
+  promotionCount: number
 }
 
 export type GetEvent = {
@@ -41,4 +42,5 @@ export type GetEvent = {
   type: string
   clerkId: string
   email: string
+  promotionCount: number
 }

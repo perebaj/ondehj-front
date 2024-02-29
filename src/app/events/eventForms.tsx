@@ -93,6 +93,7 @@ export default function EventForms(props: {
         createdAt: new Date(),
         clerkId: mongdbUser?.clerkId,
         email: mongdbUser?.email,
+        promotionCount: 0,
       }
 
       if (props.variant === 'edit') {

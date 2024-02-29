@@ -4,7 +4,7 @@ import Event from './event'
 import EventForms from './eventForms'
 export type EventsProps = {
   events: GetEvent[]
-  clerkId: string
+  currUserSesionClerkId: string
 }
 
 export default function Events(props: EventsProps) {
@@ -26,6 +26,7 @@ export default function Events(props: EventsProps) {
           {props.events.map((event) => (
             <Event
               eventProps={{
+                clerkId: event.clerkId,
                 _id: event._id,
                 name: event.name,
                 description: event.description,
@@ -34,7 +35,7 @@ export default function Events(props: EventsProps) {
                 instagramURL: event.instagramURL,
               }}
               key={event._id.toString()}
-              edit={event.clerkId === props.clerkId} // Attribute true when event.clerkId is equal to user.clerkId, false otherwise
+              edit={event.clerkId === props.currUserSesionClerkId} // Attribute true when event.clerkId is equal to user.clerkId, false otherwise
             />
           ))}
         </div>

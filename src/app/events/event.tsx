@@ -2,6 +2,7 @@
 import 'moment/locale/pt-br'
 
 import {
+  ArrowBigUpDash,
   ChevronRightIcon,
   Disc3,
   Dumbbell,
@@ -13,6 +14,7 @@ import { ObjectId } from 'mongodb'
 import { useState } from 'react'
 
 import { Event } from '@/lib/mongodb/db'
+import { promoteEvent } from '@/lib/mongodb/events'
 
 import EventForms from './eventForms'
 
@@ -23,6 +25,7 @@ export interface EventProps {
   eventDate: Date
   type: string
   instagramURL?: string
+  clerkId: string
 }
 
 export default function Event(props: {
@@ -32,6 +35,7 @@ export default function Event(props: {
   moment.locale('pt-br')
   const date = moment(props.eventProps.eventDate).format('LL')
   const [showFullDescription, setShowFullDescription] = useState(false)
+  // const [isPromoted, setIsPromoted] = useState(false)
   let TypeIcon
   let TypeName
   switch (props.eventProps.type) {
@@ -56,13 +60,37 @@ export default function Event(props: {
       TypeName = 'Acadêmico'
   }
 
+  async function handlePromotion() {
+    try {
+      await promoteEvent(props.eventProps._id, props.eventProps.clerkId)
+    } catch (error) {
+      console.error('Error promoting event', error)
+    }
+  }
+
   return (
     <div className="relative flex flex-col items-start justify-start gap-1 rounded-lg border p-6 shadow-md">
       <div className="flex w-full items-center justify-between gap-8 pb-2">
-        <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50">
-          <TypeIcon className="mr-1.5 h-4 w-4" />
-          {TypeName}
-        </span>
+        <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center">
+            {' '}
+            {/* Container for promotion button and count */}
+            <button
+              className={'text-green-500  hover:underline'}
+              onClick={handlePromotion}
+            >
+              <ArrowBigUpDash className="mr-1 inline-block h-6 w-6" />{' '}
+              {/* Up arrow icon */}
+              {/* Button label */}
+              <span className="ml-2 text-lg text-gray-500">{1}</span>{' '}
+            </button>
+          </div>
+          {/* Promotion count */}
+          <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50">
+            <TypeIcon className="mr-1.5 h-4 w-4" />
+            {TypeName}
+          </span>
+        </div>
         {props.edit ? (
           <EventForms defaultValues={props.eventProps} variant="edit" />
         ) : null}

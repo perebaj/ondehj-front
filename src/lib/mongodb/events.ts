@@ -26,6 +26,58 @@ export async function getEvents(): Promise<GetEvent[]> {
   }
 }
 
+export type PromoteEvent = {
+  _id?: ObjectId
+  eventId: ObjectId
+  promotionCount: number
+  users: string[]
+}
+
+export async function promoteEvent(
+  eventId: ObjectId,
+  userId: string,
+): Promise<void> {
+  try {
+    await client.connect()
+
+    const o_eventId = new ObjectId(eventId)
+
+    // verify if the promoted event exists
+    const pEvent = await client
+      .db('ondehoje')
+      .collection<PromoteEvent>('promotedEvents')
+      .findOne({ eventId: o_eventId })
+    // if not exists, create it
+    if (!pEvent) {
+      await client
+        .db('ondehoje')
+        .collection<PromoteEvent>('promotedEvents')
+        .insertOne({
+          eventId: o_eventId,
+          promotionCount: 1,
+          users: [userId],
+        })
+      console.log('Event promoted created')
+    } else {
+      await client
+        .db('ondehoje')
+        .collection<PromoteEvent>('promotedEvents')
+        .findOneAndUpdate(
+          { eventId: o_eventId, users: { $nin: [userId] } },
+          {
+            $inc: { promotionCount: 1 },
+            $push: { users: userId },
+          },
+        )
+
+      console.log('Event promoted')
+    }
+  } catch (error) {
+    console.error('Error promoting event', error)
+    throw error
+  }
+}
+
 export async function saveEvent(event: Event): Promise<void> {
   try {
     await client.connect()

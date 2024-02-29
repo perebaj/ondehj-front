@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import moment from 'moment'
 import { ObjectId } from 'mongodb'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { Event } from '@/lib/mongodb/db'
@@ -88,13 +89,13 @@ export default function Event(props: {
         )}
       </p>
       {props.eventProps.instagramURL && (
-        <a
+        <Link
           className="inline-flex items-center no-underline hover:underline"
           href={props.eventProps.instagramURL}
         >
           Veja no Instagram
           <ChevronRightIcon className="ml-1.5 inline-block h-4 w-4" />
-        </a>
+        </Link>
       )}
     </div>
   )

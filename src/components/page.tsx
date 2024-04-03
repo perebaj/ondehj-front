@@ -10,7 +10,7 @@ export default function LandingPage() {
   return (
     <div>
       <Header />
-      <section className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-16 lg:px-32 lg:py-32">
+      <section className="mx-auto flex max-w-7xl flex-col items-center justify-center px-2 py-16 lg:px-32 lg:py-32">
         <motion.div
           initial={{ scale: 0.8 }}
           animate={{ opacity: 1, scale: 1.0 }}

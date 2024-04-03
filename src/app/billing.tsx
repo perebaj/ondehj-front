@@ -24,7 +24,7 @@ export default function Billing(props: { name: string }) {
       <DialogContent className="max-w-xs lg:max-w-2xl">
         <DialogHeader>
           <div className="flex flex-col  items-center justify-center gap-2 px-4 py-4">
-            <DialogTitle className="text-2xl text-blue-500">
+            <DialogTitle className="text-2xl text-primary">
               Código Gerado com sucesso!
             </DialogTitle>
             <DialogDescription>

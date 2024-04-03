@@ -10,7 +10,7 @@ import {
 export default function FAQ() {
   return (
     <section id="faq">
-      <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-32 md:flex-row">
+      <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 py-16 lg:flex-row lg:py-32">
         <div className="flex basis-1/2 flex-col text-left">
           <p className="mb-4 inline-block text-2xl font-semibold text-primary">
             FAQ

@@ -56,7 +56,7 @@ export default function FAQ() {
                 <p className="text-xl">
                   <span className="font-bold">É simples. </span> Basta{' '}
                   <Link
-                    href="https://www.instagram.com/ondehoje/"
+                    href="https://www.instagram.com/ondehoje.app/"
                     className="font-bold text-primary no-underline hover:underline"
                   >
                     entrar em contato

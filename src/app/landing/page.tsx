@@ -29,7 +29,10 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.9 }}
               >
                 <Button size={'lg'} className="bg-primary py-8">
-                  <Link className="text-xl lg:text-3xl" href="/events">
+                  <Link
+                    className="text-sm font-bold lg:text-3xl"
+                    href="/events"
+                  >
                     Onde é o rolê hoje?
                   </Link>
                 </Button>

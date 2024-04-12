@@ -21,7 +21,6 @@ declare type UpdateUserParams = {
 export async function createUser(user: UserCreateSchema) {
   try {
     await prisma.user.create({ data: user })
-    console.log('user created')
   } catch (error) {
     console.error(error)
   }
@@ -36,7 +35,7 @@ export async function getUserById(userId: string) {
   }
 }
 
-export async function Users() {
+export async function users() {
   try {
     const users = await prisma.user.findMany()
     console.log('Users found')

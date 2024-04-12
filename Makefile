@@ -1,3 +1,12 @@
+## run the tests. Usage `make test testcase=TestName` to run an isolated test or `make test` to run all tests
+.PHONY: test
+test:
+	if [ -n "$(testcase)" ]; then \
+		npx jest -t=$(testcase); \
+	else \
+		npx jest; \
+	fi
+
 ## run lint
 .PHONY: lint
 lint:

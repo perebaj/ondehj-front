@@ -13,8 +13,6 @@ import { ObjectId } from 'mongodb'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { Event } from '@/lib/mongodb/db'
-
 import EventForms from './eventForms'
 
 export interface EventProps {

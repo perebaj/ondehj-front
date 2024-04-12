@@ -33,7 +33,7 @@ model event {
   type String?
   description String
   university_name String
-  instragram_url String?
-  user_id Int // Foreign key to users table
-  user user @relation(fields: [user_id], references: [id]) //relation with users table
+  instagram_url String?
+  user_id String // Foreign key to users table
+  user user @relation(fields: [user_id], references: [user_id]) //relation with users table
 }

@@ -1,3 +1,4 @@
+// All database operations related to events will be defined here.
 'use server'
 import { PrismaClient } from '@prisma/client'
 
@@ -9,7 +10,7 @@ export interface EventCreateSchema {
   description: string
   university_name: string
   instagram_url: string
-  user_id: number
+  user_id: string
   event_date: Date
 }
 
@@ -17,7 +18,6 @@ export interface EventCreateSchema {
 export async function createEvent(event: EventCreateSchema) {
   try {
     await prisma.event.create({ data: event })
-    console.log('event created')
   } catch (error) {
     console.error(error)
   }

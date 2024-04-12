@@ -7,11 +7,11 @@ CREATE TABLE "event" (
     "type" TEXT,
     "description" TEXT NOT NULL,
     "university_name" TEXT NOT NULL,
-    "instragram_url" TEXT,
-    "user_id" INTEGER NOT NULL,
+    "instagram_url" TEXT,
+    "user_id" TEXT NOT NULL,
 
     CONSTRAINT "event_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
-ALTER TABLE "event" ADD CONSTRAINT "event_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "event" ADD CONSTRAINT "event_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;

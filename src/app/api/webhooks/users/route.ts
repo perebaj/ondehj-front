@@ -8,7 +8,7 @@ import {
   deleteUser,
   getUserById,
   updateUser,
-} from '@/lib/mongodb/user'
+} from '@/lib/postgres/users'
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -60,56 +60,63 @@ export async function POST(req: Request) {
 
   console.log(body)
   if (eventType === 'user.created' || eventType === 'user.updated') {
-    const {
-      id,
-      first_name,
-      last_name,
-      image_url,
-      email_addresses,
-      public_metadata,
-    } = evt.data
+    try {
+      const {
+        id,
+        first_name,
+        last_name,
+        image_url,
+        email_addresses,
+        public_metadata,
+      } = evt.data
 
-    const u = await getUserById(id)
-    if (!u) {
-      const user = {
-        clerkId: id,
-        email: email_addresses[0].email_address,
-        firstName: first_name,
-        lastName: last_name,
-        photo: image_url,
-        role: public_metadata.role,
+      const u = await getUserById(id)
+      if (!u) {
+        await createUser({
+          email: email_addresses[0].email_address,
+          first_name,
+          last_name,
+          profile_image_url: image_url,
+          role: public_metadata.role as string,
+          user_id: id,
+        })
+
+        return NextResponse.json({ message: 'User created' }, { status: 200 })
+      } else {
+        await updateUser(id, {
+          first_name,
+          last_name,
+          profile_image_url: image_url,
+          role: public_metadata.role as string,
+        })
+
+        return NextResponse.json({ message: 'User updated' }, { status: 200 })
       }
-
-      await createUser(user)
-
-      return NextResponse.json({ message: 'User created' }, { status: 200 })
-    } else {
-      const user = {
-        firstName: first_name,
-        lastName: last_name,
-        photo: image_url,
-        role: public_metadata.role,
-      }
-
-      await updateUser(id, user)
-
-      return NextResponse.json({ message: 'User updated' }, { status: 200 })
+    } catch (error) {
+      console.error(error)
+      return NextResponse.json({ message: 'Error occured' }, { status: 500 })
     }
   } else if (eventType === 'user.deleted') {
-    const { id } = evt.data
+    try {
+      const { id } = evt.data
+      if (!id) {
+        return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      }
 
-    if (!id) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 })
-    }
+      const u = await getUserById(id)
 
-    const u = await getUserById(id)
+      if (u) {
+        await deleteUser(id)
 
-    if (u) {
-      await deleteUser(id)
-
-      return NextResponse.json({ message: 'User deleted' }, { status: 200 })
+        return NextResponse.json({ message: 'User deleted' }, { status: 200 })
+      } else {
+        return NextResponse.json({ message: 'User not found' }, { status: 404 })
+      }
+    } catch (error) {
+      console.error(error)
+      return NextResponse.json({ message: 'Error occured' }, { status: 500 })
     }
   } else {
-    return NextResponse.json({ message: 'Event not handled' }, { status: 200 })
+    return NextResponse.json({ message: 'Event not handled' }, { status: 405 })
   }
 }

@@ -56,6 +56,18 @@ dev/restart:
 	@echo "Restarting development server..."
 	@docker-compose restart $(container)
 
+## Prisma studio
+.PHONY: prisma/studio
+prisma/studio:
+	@echo "Starting Prisma Studio..."
+	@npx prisma studio
+
+## Run prisma migrate dev. Not recommended for production
+.PHONY: prisma/migrate/dev
+prisma/migrate/dev:
+	@echo "Running Prisma Migrate Dev..."
+	@npx prisma migrate dev
+
 ## Display help for all targets
 .PHONY: help
 help:

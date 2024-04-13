@@ -41,7 +41,7 @@ export async function getEventById(id: string) {
   })
 }
 
-// getAllEvents
+// getAllEventss
 export async function getAllEvents(university_name: string) {
   return await prisma.event.findMany({
     where: {

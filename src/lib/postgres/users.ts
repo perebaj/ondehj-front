@@ -38,7 +38,6 @@ export async function getUserById(userId: string) {
 export async function users() {
   try {
     const users = await prisma.user.findMany()
-    console.log('Users found')
     return users
   } catch (error) {
     console.error(error)
@@ -51,7 +50,6 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
       where: { user_id: clerkId },
       data: user,
     })
-    console.log('User updated')
     return updatedUser
   } catch (error) {
     console.error(error)
@@ -61,7 +59,6 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
 export async function deleteUser(clerkId: string) {
   try {
     await prisma.user.delete({ where: { user_id: clerkId } })
-    console.log('User deleted')
   } catch (error) {
     console.error(error)
   }

@@ -3,7 +3,8 @@
 import prisma from './db'
 import { createEvent, getAllEvents } from './events'
 import { createUser, UserCreateSchema } from './users'
-afterEach(async () => {
+
+beforeEach(async () => {
   const deleteAllUsers = prisma.user.deleteMany()
   const deleteAllEvents = prisma.event.deleteMany()
 
@@ -13,23 +14,23 @@ afterEach(async () => {
 })
 
 test('createEvent', async () => {
-  await prisma.user.create({
-    data: {
-      email: 'test@gmail.com',
-      role: 'USER',
-      user_id: '1234',
-      first_name: 'test',
-      last_name: 'test',
-      profile_image_url: 'test',
-    },
-  })
+  const user: UserCreateSchema = {
+    email: 't@gmail.com',
+    role: 'USER',
+    user_id: '1234',
+    first_name: 'test',
+    last_name: 'test',
+    profile_image_url: 'test',
+  }
+
+  await createUser(user)
 
   await createEvent({
     name: 'test',
     description: 'test',
     university_name: 'test',
     instagram_url: 'test',
-    user_id: '1234',
+    user_id: user.user_id,
     type: 'academico',
     event_date: new Date(),
   })
@@ -44,7 +45,7 @@ test('createEvent', async () => {
   expect(got?.description).toEqual('test')
   expect(got?.university_name).toEqual('test')
   expect(got?.instagram_url).toEqual('test')
-  expect(got?.user_id).toEqual('1234')
+  expect(got?.user_id).toEqual(user.user_id)
 })
 
 test('getAllEvents', async () => {
@@ -110,4 +111,9 @@ test('getAllEvents', async () => {
   expect(got[1].university_name).toEqual('ufscar')
   expect(got[1].instagram_url).toEqual('event3instagram')
   expect(got[1].user_id).toEqual(user.user_id)
+
+  // get all event from a university that does not exist
+
+  const got2 = await getAllEvents('notevenexist')
+  expect(got2.length).toEqual(0)
 })

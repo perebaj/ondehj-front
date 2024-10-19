@@ -31,6 +31,7 @@ export async function saveEvent(event: Event): Promise<void> {
     await client.connect()
     await client.db().collection<Event>('events').insertOne(event)
     console.log('Event saved')
+    event.likes = [] // Inicializa o array de likes
   } catch (error) {
     console.error('Error saving event', error)
     throw error
@@ -39,16 +40,31 @@ export async function saveEvent(event: Event): Promise<void> {
   }
 }
 
-export async function editEvent(event: Event): Promise<void> {
+export async function editEvent(event: Event, userId: ObjectId): Promise<void> {
   try {
     await client.connect()
     const o_id = new ObjectId(event._id)
     delete event._id
-    await client
+
+    // Verifica se o usuário já deu like
+    const existingEvent = await client
       .db()
       .collection<Event>('events')
-      .updateOne({ _id: o_id }, { $set: event })
-    console.log('Event edited')
+      .findOne({ _id: o_id })
+
+    if (
+      existingEvent &&
+      !existingEvent.likes.some((like) => like.userId.equals(userId))
+    ) {
+      // Adiciona o like se o usuário não tiver dado like
+      await client
+        .db()
+        .collection<Event>('events')
+        .updateOne({ _id: o_id }, { $push: { likes: { userId } } })
+      console.log('Like added')
+    } else {
+      console.log('User has already liked this event')
+    }
   } catch (error) {
     console.error('Error editing event', error)
     handleError(error)

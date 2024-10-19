@@ -29,6 +29,7 @@ export type Event = {
   type?: string
   clerkId?: string
   email?: string
+  likes: { userId: ObjectId }[] // Adicionando um campo para armazenar os likes
 }
 
 export type GetEvent = {

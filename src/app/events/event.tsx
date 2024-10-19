@@ -56,6 +56,8 @@ export default function Event(props: {
       TypeName = 'Acadêmico'
   }
 
+  const [likes, setLikes] = useState(0) // State to track likes
+
   return (
     <div className="relative flex flex-col items-start justify-start gap-1 rounded-lg border bg-white p-6 shadow-md">
       <div className="flex w-full items-center justify-between gap-8 pb-2">
@@ -77,8 +79,7 @@ export default function Event(props: {
         {showFullDescription
           ? props.eventProps.description
           : props.eventProps.description.slice(0, 100) + '...'}{' '}
-        {/* Display only a portion of the description */}
-        {props.eventProps.description.length > 100 && ( // Check if description is longer than 100 characters
+        {props.eventProps.description.length > 100 && (
           <button
             className="text-primary hover:underline"
             onClick={() => setShowFullDescription(!showFullDescription)}
@@ -96,6 +97,17 @@ export default function Event(props: {
           <ChevronRightIcon className="ml-1.5 inline-block h-4 w-4" />
         </Link>
       )}
+      <div className="flex items-center">
+        <button
+          className="text-primary hover:underline"
+          onClick={() => setLikes(likes + 1)} // Increment likes on button click
+        >
+          ❤️ Like
+        </button>
+        <span className="ml-2 text-xl">
+          {likes} {/* Display the number of likes */}
+        </span>
+      </div>
     </div>
   )
 }

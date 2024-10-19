@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+"use client";
+import Link from "next/link";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   return (
@@ -15,18 +15,13 @@ export default function Header() {
           </Link>
           <div className="flex flex-1 justify-end">
             <Link href="/events">
-              <motion.button
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Button size={'lg'} className="text-lg text-white">
-                  Login
-                </Button>
-              </motion.button>
+              <Button size={"lg"} className="text-lg text-white">
+                Login
+              </Button>
             </Link>
           </div>
         </div>
       </nav>
     </header>
-  )
+  );
 }

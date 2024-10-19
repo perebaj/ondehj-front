@@ -1,26 +1,26 @@
-import { auth } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
-import { Toaster } from 'sonner'
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 
-import { getEvents } from '@/lib/mongodb/events'
-import { getUserById } from '@/lib/mongodb/user'
+import { getEvents } from "@/lib/mongodb/events";
+import { getUserById } from "@/lib/mongodb/user";
 
-import Events from './events'
-import EventsHeader from './header'
+import Events from "./events";
+import EventsHeader from "./header";
 export default async function EventsPage() {
-  let user, events
+  let user, events;
   try {
-    const { userId } = auth()
+    const { userId } = auth();
 
-    if (!userId) redirect('/sign-in')
+    if (!userId) redirect("/sign-in");
 
-    user = await getUserById(userId)
+    user = await getUserById(userId);
 
-    if (!user) redirect('/sign-in')
+    if (!user) redirect("/sign-in");
 
-    events = await getEvents()
+    events = await getEvents("UFScar");
   } catch {
-    redirect('/sign-in')
+    redirect("/sign-in");
   }
 
   return (
@@ -29,5 +29,5 @@ export default async function EventsPage() {
       <EventsHeader />
       <Events events={events} clerkId={user?.clerkId} role={user?.role} />
     </div>
-  )
+  );
 }

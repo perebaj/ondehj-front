@@ -3,18 +3,20 @@ import { ObjectId } from 'mongodb'
 
 import { handleError } from '../utils'
 import { client, Event, GetEvent } from './db'
-export async function getEvents(): Promise<GetEvent[]> {
+export async function getEvents(university: string): Promise<GetEvent[]> {
   try {
     await client.connect()
+    const filter = university ? { university } : {}
     const events = await client
       .db()
       .collection<GetEvent>('events')
       .find({
+        ...filter,
         eventDate: {
           $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
       })
-      .sort({ eventDate: 1 }) // Sort by eventDate in descending order
+      .sort({ eventDate: 1 }) // Sort by eventDate in ascending order
       .toArray()
 
     return events

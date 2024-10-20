@@ -13,13 +13,6 @@ export default function Header() {
               Onde Hoje?
             </span>
           </Link>
-          <div className="flex flex-1 justify-end">
-            <Link href="/events">
-              <Button size={"lg"} className="text-lg text-white">
-                Login
-              </Button>
-            </Link>
-          </div>
         </div>
       </nav>
     </header>

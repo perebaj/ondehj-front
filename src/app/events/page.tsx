@@ -1,36 +1,23 @@
-// import { auth } from "@clerk/nextjs";
-// import { redirect } from "next/navigation";
-// import { Toaster } from "sonner";
+import EventsHeader from "./header";
+import { ObjectId } from "mongodb";
+import Events from "./events";
 
-// import { getEvents } from "@/lib/mongodb/events";
-// import { getUserById } from "@/lib/mongodb/user";
+const event = {
+  _id: new ObjectId(),
+  name: "Evento Teste",
+  description:
+    "Descrição do evento teste aksjd  aksjdl jakl djalj alksjd lkajsdl jalks djlasjd lkajl kdjalsdj lakjsdlk jalskd jalksjdlkajs aksjd lj klasjd lajsldk jalsdj lkajdl jalskd jlasjd lajdl kjaslkd jalksjd lkajsdlk jalskd jlakdj lkajs dklajsdlk jadslk",
+  eventDate: new Date(),
+  type: "academico",
+  instagramURL: "https://instagram.com",
+  role: "Participante",
+};
 
-// import Events from "./events";
-// import EventsHeader from "./header";
-
-// export default async function EventsPage() {
-//   let user, events;
-
-//   try {
-//     const { userId } = auth();
-
-//     if (!userId) redirect("/sign-in");
-
-//     user = await getUserById(userId);
-
-//     if (!user) redirect("/sign-in");
-
-//     // Fetch events based on the provided university
-//     events = await getEvents(university);
-//   } catch {
-//     redirect("/sign-in");
-//   }
-
-//   return (
-//     <div>
-//       <Toaster richColors closeButton />
-//       <EventsHeader />
-//       <Events events={events} clerkId={user?.clerkId} role={user?.role} />
-//     </div>
-//   );
-// }
+export default function EventsPage() {
+  return (
+    <div>
+      <EventsHeader />
+      <Events events={[event]} role="Participante" />
+    </div>
+  );
+}

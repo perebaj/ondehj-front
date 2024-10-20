@@ -1,5 +1,5 @@
-"use client";
-import "moment/locale/pt-br";
+'use client'
+import 'moment/locale/pt-br'
 
 import {
   ChevronRightIcon,
@@ -7,51 +7,51 @@ import {
   Dumbbell,
   GraduationCap,
   Users,
-} from "lucide-react";
-import moment from "moment";
-import { ObjectId } from "mongodb";
-import Link from "next/link";
+} from 'lucide-react'
+import moment from 'moment'
+import { ObjectId } from 'mongodb'
+import Link from 'next/link'
 
-import ShowDescription from "./showDescriptionClient";
+import ShowDescription from './showDescriptionClient'
 
 export interface EventProps {
-  _id: ObjectId;
-  name: string;
-  description: string;
-  eventDate: Date;
-  type: string;
-  instagramURL?: string;
-  role?: string;
+  _id: ObjectId
+  name: string
+  description: string
+  eventDate: Date
+  type: string
+  instagramURL?: string
+  role?: string
 }
 
 export default function Event(props: {
-  eventProps: EventProps;
-  edit: boolean;
+  eventProps: EventProps
+  edit: boolean
 }) {
-  moment.locale("pt-br");
-  const date = moment(props.eventProps.eventDate).format("LL");
-  let TypeIcon;
-  let TypeName;
+  moment.locale('pt-br')
+  const date = moment(props.eventProps.eventDate).format('LL')
+  let TypeIcon
+  let TypeName
   switch (props.eventProps.type) {
-    case "academico":
-      TypeIcon = GraduationCap;
-      TypeName = "Acadêmico";
-      break;
-    case "esportivo":
-      TypeIcon = Dumbbell;
-      TypeName = "Esportivo";
-      break;
-    case "social":
-      TypeIcon = Users;
-      TypeName = "Social";
-      break;
-    case "cultural":
-      TypeIcon = Disc3;
-      TypeName = "Cultural";
-      break;
+    case 'academico':
+      TypeIcon = GraduationCap
+      TypeName = 'Acadêmico'
+      break
+    case 'esportivo':
+      TypeIcon = Dumbbell
+      TypeName = 'Esportivo'
+      break
+    case 'social':
+      TypeIcon = Users
+      TypeName = 'Social'
+      break
+    case 'cultural':
+      TypeIcon = Disc3
+      TypeName = 'Cultural'
+      break
     default:
-      TypeIcon = GraduationCap;
-      TypeName = "Acadêmico";
+      TypeIcon = GraduationCap
+      TypeName = 'Acadêmico'
   }
 
   return (
@@ -79,5 +79,5 @@ export default function Event(props: {
         </Link>
       )}
     </div>
-  );
+  )
 }

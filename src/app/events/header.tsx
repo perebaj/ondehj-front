@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 export default function EventsHeader() {
   return (
     <header className="border-b bg-slate-50">
@@ -11,5 +11,5 @@ export default function EventsHeader() {
         </Link>
       </div>
     </header>
-  );
+  )
 }

@@ -1,7 +1,5 @@
-"use client";
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
+'use client'
+import Link from 'next/link'
 
 export default function Header() {
   return (
@@ -16,5 +14,5 @@ export default function Header() {
         </div>
       </nav>
     </header>
-  );
+  )
 }

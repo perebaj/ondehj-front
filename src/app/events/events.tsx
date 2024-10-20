@@ -1,12 +1,12 @@
-import { GetEvent } from "@/lib/mongodb/db";
-import Event from "./event";
-import EventForms from "./eventFormsClient";
-import UniFilterClient from "./UniFilterClient";
+import { GetEvent } from '@/lib/mongodb/db'
+
+import Event from './event'
+import UniFilterClient from './UniFilterClient'
 
 export type EventsProps = {
-  events: GetEvent[];
-  role: string | unknown;
-};
+  events: GetEvent[]
+  role: string | unknown
+}
 
 export default function Events({ events }: EventsProps) {
   return (
@@ -42,5 +42,5 @@ export default function Events({ events }: EventsProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

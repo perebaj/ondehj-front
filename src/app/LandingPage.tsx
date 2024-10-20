@@ -1,6 +1,6 @@
-import FAQ from "./faq";
-import Header from "./headerClient";
-import OndeHjSection from "./ondehjClient";
+import FAQ from './faq'
+import Header from './headerClient'
+import OndeHjSection from './ondehjClient'
 export default function LandingPage() {
   return (
     <div>
@@ -8,5 +8,5 @@ export default function LandingPage() {
       <OndeHjSection />
       <FAQ />
     </div>
-  );
+  )
 }

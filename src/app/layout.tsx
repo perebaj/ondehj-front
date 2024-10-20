@@ -1,15 +1,15 @@
-import "./globals.css";
+import './globals.css'
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Onde Hoje?",
-};
+  title: 'Onde Hoje?',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -21,5 +21,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  );
+  )
 }

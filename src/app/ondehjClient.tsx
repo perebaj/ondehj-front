@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link'
+
+import { Button } from '@/components/ui/button'
 
 export default function OndeHjSection() {
   return (
@@ -12,7 +13,7 @@ export default function OndeHjSection() {
           <span className="text-slate-900">em um só lugar</span>
         </h1>
         <div>
-          <Button size={"lg"} className="bg-primary py-8">
+          <Button size={'lg'} className="bg-primary py-8">
             <Link className="text-sm font-bold lg:text-3xl" href="/events">
               Onde é o rolê hoje?
             </Link>
@@ -20,5 +21,5 @@ export default function OndeHjSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

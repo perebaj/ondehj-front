@@ -1,13 +1,13 @@
-import { Suspense } from "react";
-import EventsHeader from "./header";
-import { GetEvent } from "@/lib/mongodb/db";
-import Events from "./events";
-import { ObjectId } from "mongodb";
-import { getAllEvents, getEvents } from "@/lib/mongodb/events";
+import { Suspense } from 'react'
+
+import { getAllEvents } from '@/lib/mongodb/events'
+
+import Events from './events'
+import EventsHeader from './header'
 
 export default async function EventsPage() {
-  console.log("jojo test");
-  const events = await getAllEvents();
+  console.log('jojo test')
+  const events = await getAllEvents()
   return (
     <div>
       <EventsHeader />
@@ -15,5 +15,5 @@ export default async function EventsPage() {
         <Events events={events} role="Participante" />
       </Suspense>
     </div>
-  );
+  )
 }

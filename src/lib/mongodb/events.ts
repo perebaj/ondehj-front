@@ -13,7 +13,7 @@ export async function getEvents(university: string): Promise<GetEvent[]> {
         eventDate: {
           $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
-        university: university,
+        university,
       })
       .sort({ eventDate: 1 }) // Sort by eventDate in ascending order
       .toArray()
@@ -38,7 +38,7 @@ export async function getAllEvents(): Promise<GetEvent[]> {
           eventDate: {
             $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
           },
-        } // Get all events that are happening in the next 24 hours
+        }, // Get all events that are happening in the next 24 hours
       )
       .sort({ eventDate: 1 }) // Sort by eventDate in ascending order
       .toArray()

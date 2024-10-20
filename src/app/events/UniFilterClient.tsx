@@ -1,39 +1,38 @@
-"use client";
+'use client'
+import { usePathname, useRouter } from 'next/navigation' // Importando hooks corretos para usar URL
+import { useEffect, useState } from 'react'
+
 import {
   Select,
   SelectContent,
   SelectItem,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
   SelectTrigger,
   SelectValue,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
-} from "@/components/ui/select";
-import { useRouter, usePathname, useSearchParams } from "next/navigation"; // Importando hooks corretos para usar URL
+} from '@/components/ui/select'
 
-import { useEffect, useState } from "react";
-
-const universities = ["UFScar", "USP São Carlos", "Unicamp", "USP São Paulo"];
+const universities = ['UFScar', 'USP São Carlos', 'Unicamp', 'USP São Paulo']
 
 export default function UniFilterClient() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [university, setUniversity] = useState("");
+  const router = useRouter()
+  const pathname = usePathname()
+  const [university, setUniversity] = useState('')
 
   // Atualizar o valor da universidade com base no parâmetro da URL
   useEffect(() => {
-    const pathUniversity = pathname.split("/")[2]; // Extrair o valor da URL
+    const pathUniversity = pathname.split('/')[2] // Extrair o valor da URL
     if (pathUniversity && universities.includes(pathUniversity)) {
-      setUniversity(pathUniversity);
+      setUniversity(pathUniversity)
     }
-  }, [pathname]);
+  }, [pathname])
 
   const handleUniversityChange = (value: string) => {
-    setUniversity(value);
+    setUniversity(value)
     if (value) {
-      router.replace(`/events/${value}`); // Navegar sem perder o estado
+      router.replace(`/events/${value}`) // Navegar sem perder o estado
     }
-  };
+  }
 
   return (
     <div className="container mx-auto px-4 py-4 md:px-6 md:py-6">
@@ -52,5 +51,5 @@ export default function UniFilterClient() {
         </SelectContent>
       </Select>
     </div>
-  );
+  )
 }

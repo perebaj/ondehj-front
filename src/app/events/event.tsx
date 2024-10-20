@@ -12,7 +12,6 @@ import moment from "moment";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
 
-import EventForms from "./eventFormsClient";
 import ShowDescription from "./showDescriptionClient";
 
 export interface EventProps {
@@ -62,9 +61,6 @@ export default function Event(props: {
           <TypeIcon className="mr-1.5 h-4 w-4" />
           {TypeName}
         </span>
-        {props.edit ? (
-          <EventForms defaultValues={props.eventProps} variant="edit" />
-        ) : null}
       </div>
       <time className="self-start text-base font-extrabold  text-gray-500 dark:text-gray-400">
         {date}

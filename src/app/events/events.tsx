@@ -8,7 +8,7 @@ export type EventsProps = {
   role: string | unknown;
 };
 
-export default function Events({ events, role }: EventsProps) {
+export default function Events({ events }: EventsProps) {
   return (
     <div className="w-full py-10 lg:py-14">
       <div className="container grid items-center gap-4 px-4 py-4 text-center md:px-6 md:py-6">
@@ -19,7 +19,7 @@ export default function Events({ events, role }: EventsProps) {
           <p className="mx-auto max-w-[700px] py-4 text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Descubra e participe de eventos que acontecem no seu campus.
           </p>
-          {role === "fullAdmin" && <EventForms variant="create" />}
+          {/* <EventForms variant="create" /> */}
         </div>
       </div>
       <UniFilterClient />
@@ -36,7 +36,7 @@ export default function Events({ events, role }: EventsProps) {
                 instagramURL: event.instagramURL,
               }}
               key={event._id.toString()}
-              edit={false}
+              edit={true}
             />
           ))}
         </div>

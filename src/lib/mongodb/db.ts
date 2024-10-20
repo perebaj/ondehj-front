@@ -27,8 +27,6 @@ export type Event = {
   name: string
   instagramURL?: string
   type?: string
-  clerkId?: string
-  email?: string
   university?: string
 }
 

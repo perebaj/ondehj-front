@@ -1,13 +1,6 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { McLaren as Font } from "next/font/google";
-
-const McLaren = Font({
-  weight: "400",
-  subsets: ["latin"],
-  style: "normal",
-});
 
 export const metadata: Metadata = {
   title: "Onde Hoje?",

@@ -1,5 +1,4 @@
 "use client";
-import { useAuth } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -43,7 +42,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Event } from "@/lib/mongodb/db";
 import { deleteEvent, editEvent, saveEvent } from "@/lib/mongodb/events";
-import { getUserById } from "@/lib/mongodb/user";
 import { cn } from "@/lib/utils";
 
 const universities = ["UFScar", "USP São Carlos", "USP São Paulo", "Unicamp"];
@@ -78,14 +76,10 @@ export default function EventForms(props: {
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const router = useRouter();
 
-  const { userId } = useAuth();
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsButtonLoading(true);
-      if (!userId) redirect("/sign-in");
 
-      const mongdbUser = await getUserById(userId);
       const event: Event = {
         _id: defaultValue?._id,
         name: values.name,
@@ -94,8 +88,6 @@ export default function EventForms(props: {
         type: values.type,
         eventDate: values.eventDate,
         createdAt: new Date(),
-        clerkId: mongdbUser?.clerkId,
-        email: mongdbUser?.email,
         university: values.university,
       };
 

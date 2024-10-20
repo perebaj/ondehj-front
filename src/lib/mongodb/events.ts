@@ -6,16 +6,40 @@ import { client, Event, GetEvent } from './db'
 export async function getEvents(university: string): Promise<GetEvent[]> {
   try {
     await client.connect()
-    const filter = university ? { university } : {}
     const events = await client
       .db()
       .collection<GetEvent>('events')
       .find({
-        ...filter,
         eventDate: {
           $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
+        university: university,
       })
+      .sort({ eventDate: 1 }) // Sort by eventDate in ascending order
+      .toArray()
+
+    return events
+  } catch (error) {
+    console.error('Error getting events', error)
+    throw error
+  } finally {
+    await client.close()
+  }
+}
+
+export async function getAllEvents(): Promise<GetEvent[]> {
+  try {
+    await client.connect()
+    const events = await client
+      .db()
+      .collection<GetEvent>('events')
+      .find(
+        {
+          eventDate: {
+            $gt: new Date(Date.now() - 1000 * 60 * 60 * 24),
+          },
+        } // Get all events that are happening in the next 24 hours
+      )
       .sort({ eventDate: 1 }) // Sort by eventDate in ascending order
       .toArray()
 
